@@ -1,3 +1,3 @@
-from django.db import models
-
-# Create your models here.
+from .pizza import Pizza
+from .drinks import Drinks
+from .user import User
