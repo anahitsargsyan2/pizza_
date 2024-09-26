@@ -52,7 +52,7 @@ class RegisterView(View):
         pu.save()
 
 
-        return HttpResponseRedirect("login/")
+        return HttpResponseRedirect("/login/")
 
         
 class LoginView(View):
@@ -66,7 +66,7 @@ class LoginView(View):
         user = authenticate(username=usr, password=pswd)
         if user:
             auth_login(request, user)
-            return HttpResponseRedirect("/pizza/")
+            return HttpResponseRedirect("/basket")
         
         return render(request, "api/login.html", {"error": "Username or password is wrong"})
     

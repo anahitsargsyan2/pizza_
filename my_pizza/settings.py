@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -41,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'my_pizza.models',
+    'pizzerias'
 ]
 
 MIDDLEWARE = [
@@ -133,6 +136,10 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'an.sargsyan.2004@gmail.com'  
-EMAIL_HOST_PASSWORD = 'anahit205658'  
+EMAIL_HOST_PASSWORD = 'layp ljjk ztxn igxt'  
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 EMAIL_USE_SSL = False
+
+
+
+
