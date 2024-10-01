@@ -17,16 +17,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from .api.pizza import PizzaView
+from .api.pizza import PizzaView, MenuView
 from .api.drinks import DrinksView
 from .api.User import RegisterView, LoginView, LogOutView
 from .api.basket import BasketView
 
+
 urlpatterns = [
-    path("pizzerias/", include("pizzerias.urls")),
+   
     path('admin/', admin.site.urls),
     path('pizza/', PizzaView.as_view()),
     path('drinks/', DrinksView.as_view()),
+    path('menu/', MenuView.as_view(), name = 'menu'),
     path('register/', RegisterView.as_view(), name='register'),
     path('login/', LoginView.as_view(), name="login"),
     path('logout/', LogOutView.as_view()),

@@ -1,0 +1,96 @@
+<!-- templates/api/product.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza Products</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .pizza-container, .drinks-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .pizza-item, .drinks-item {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            width: 200px;
+            text-align: center;
+        }
+        .pizza-item img, .drinks-item img {
+            max-width: 100%;
+            border-radius: 5px;
+        }
+        .pizza-title, .drinks-tiltle {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+        .pizza-description, .drinks-description {
+            font-size: 0.9em;
+            color: #666;
+        }
+        .pizza-price, .drinks-price {
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .add-to-basket {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Our Pizzas</h1>
+<div class="pizza-container">
+    {% for pizza in pizzas %}
+    <div class="pizza-item">
+        <img src="{{ pizza.image_url }}" alt="{{ pizza.title }}">
+        <div class="pizza-title">{{ pizza.title }}</div>
+        <div class="pizza-description">{{ pizza.description }}</div>
+        <div class="pizza-price">{{ pizza.price }}</div>
+        <form action="{% url 'basket' %}" method="POST" class="add-to-basket-form">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="add">
+            <input type="hidden" name="product_id" value="{{ pizza.id }}">
+            <input type="number" name="quantity" value="1" min="1" style="width: 50px;">
+            <button type="submit" class="add-to-basket">Add to Basket</button>
+        </form>
+    </div>
+    {% endfor %}
+</div>
+
+
+
+<h1>Our Drinks</h1>
+<div class="drinks-container">
+    {% for drink in drinks %}
+    <div class="drinks-item">
+        <img src="{{ drink.image_url }}" alt="{{ drink.title }}">
+        <div class="drinks-title">{{ drink.title }}</div>
+        <div class="drinks-description">{{ drink.description }}</div>
+        <div class="drinks-price">{{ drink.price }}</div>
+        <form action="{% url 'basket' %}" method="POST" class="add-to-basket-form">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="add">
+            <input type="hidden" name="product_id" value="{{ drink.id }}">
+            <input type="number" name="quantity" value="1" min="1" style="width: 50px;">
+            <button type="submit" class="add-to-basket">Add to Basket</button>
+        </form>
+    </div>
+    {% endfor %}
+</div>
+
+</body>
+</html>

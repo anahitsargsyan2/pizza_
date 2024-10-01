@@ -16,7 +16,7 @@ class DrinksView(View):
             drinks = soup.find_all("div", class_="product-item")
 
             results = []
-            for drink in drinks[:5]:
+            for drink in drinks:
                 img_tag = drink.find("div", class_="img").find("img")
                 img_url = img_tag['src'] 
                 
@@ -45,7 +45,7 @@ class DrinksView(View):
                     'image_url': drink_obj.image_url
                 })
 
-            return JsonResponse({'drinks': results})
+            return render(request, "api/product.html", {'drinks': results})
 
         except requests.RequestException as e:
             return JsonResponse({'error': str(e)}, status=500)

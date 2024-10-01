@@ -4,6 +4,8 @@ from ..models.pizza import Pizza
 import requests
 from bs4 import BeautifulSoup
 from django.http import JsonResponse
+from ..models.drinks import Drinks
+from ..models.basket import Basket
 
 class PizzaView(View):
     def get(self, request):
@@ -27,13 +29,14 @@ class PizzaView(View):
                 description = description_tag.get_text(strip=True) 
                 
                 price_tag = pizza.find("span", class_="price")
-                price = price_tag.get_text(strip=True) 
+                price_str = price_tag.get_text(strip=True) 
+                price = int(''.join(filter(str.isdigit, price_str)))
 
                 pizza_obj, created = Pizza.objects.update_or_create(
                     title=title,
                     defaults={
                         'description': description,
-                        'price': price,
+                        'price': float(price),
                         'image_url': img_url
                     }
                 )
@@ -49,3 +52,15 @@ class PizzaView(View):
 
         except requests.RequestException as e:
             return JsonResponse({'error': str(e)}, status=500)
+        
+
+
+
+class MenuView(View):
+    def get(self, request):
+    
+        pizzas = Pizza.objects.all()
+
+        drinks = Drinks.objects.all()
+
+        return render(request, "api/product.html", {'pizzas': pizzas, 'drinks': drinks})
